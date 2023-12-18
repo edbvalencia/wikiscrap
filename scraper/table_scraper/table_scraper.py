@@ -24,28 +24,26 @@ def extract_tables_soup_from_response(response_data):
         soup = bs(section_text, "html.parser")
         table_soup = soup.find("table")
 
-        if table_soup and is_valid_table(soup):
+        if table_soup and is_valid_table(table_soup):
             tables_titles.append(title_table)
             tables_soup.append(table_soup)
 
     return tables_titles, tables_soup
 
 
-def is_valid_table(soup):
-    rows = soup.find_all("tr")
+def is_valid_table(table_soup):
+    rows = table_soup.find_all("tr")
 
     if len(rows) < 2:
         return False
 
     number_headers_first_row = len(rows[0].find_all("th"))
-    number_total_headers = len(soup.find_all("th"))
+    number_total_headers = len(table_soup.find_all("th"))
+    number_total_data = len(table_soup.find_all("td"))
 
     if number_headers_first_row != number_total_headers:
         return False
 
-    number_total_data = len(soup.find_all("td"))
-
     if number_total_data % number_headers_first_row != 0:
         return False
-
     return True
