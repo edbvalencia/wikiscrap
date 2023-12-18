@@ -19,8 +19,3 @@ def get_dataframe_by_index(dataframes, index):
         if i == index:
             return dataframe
     return None
-
-
-titles, dataframes = get_dataframes_tables_from_browser_url(
-    "https://www.wikiwand.com/es/Anexo:Tabla_estad%C3%ADstica_de_la_Copa_Mundial_de_F%C3%BAtbol"
-)
