@@ -1,12 +1,8 @@
 from scraper.table_scraper.table_scraper import get_dataframes_tables_from_url
-from scraper.table_scraper.table_utils import (
-    browser_url_to_api_endpoint,
-    export_dataframe_csv,
-    export_dataframe_json,
-)
+from scraper.table_scraper.table_utils import browser_url_to_api_endpoint
 
 
-def extract_tables_by_browser_url(browser_url):
+def get_dataframes_tables_from_browser_url(browser_url):
     url_api_endpoint = browser_url_to_api_endpoint(browser_url)
     tables_titles, dataframes = get_dataframes_tables_from_url(url_api_endpoint)
     print_titles(tables_titles)
@@ -25,14 +21,6 @@ def get_dataframe_by_index(dataframes, index):
     return None
 
 
-def save_to_json(dataframe):
-    export_dataframe_json(dataframe)
-
-
-def save_to_csv(dataframe):
-    export_dataframe_csv(dataframe)
-
-
-titles, dataframes = extract_tables_by_browser_url(
-    "https://www.wikiwand.com/es/Anexo%3AEstad%C3%ADsticas_de_la_Copa_Libertadores"
+titles, dataframes = get_dataframes_tables_from_browser_url(
+    "https://www.wikiwand.com/es/Anexo:Tabla_estad%C3%ADstica_de_la_Copa_Mundial_de_F%C3%BAtbol"
 )

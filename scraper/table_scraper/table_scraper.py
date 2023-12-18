@@ -19,7 +19,7 @@ def extract_tables_soup_from_response(response_data):
     tables_soup = []
 
     for section in response_data.get("sections", []):
-        section_text = section.get("text", "")
+        section_text = section.get("text", "")  # puede o no tener una tabla
         title_table = section.get("line", "")
         soup = bs(section_text, "html.parser")
         table_soup = soup.find("table")
@@ -41,6 +41,11 @@ def is_valid_table(soup):
     number_total_headers = len(soup.find_all("th"))
 
     if number_headers_first_row != number_total_headers:
+        return False
+
+    number_total_data = len(soup.find_all("td"))
+
+    if number_total_data % number_headers_first_row != 0:
         return False
 
     return True
